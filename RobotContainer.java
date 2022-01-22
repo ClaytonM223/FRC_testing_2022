@@ -34,9 +34,9 @@ import frc.robot.subsystems.Valves;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  //public static Valves valves = new Valves();
-  //public static DriveTrain driveTrain = new DriveTrain();
-
+  public static Valves valves = new Valves();
+  public static DriveTrain driveTrain = new DriveTrain();
+  
   public static AutoDriveTest autoDriveTest = new AutoDriveTest();
   public static EStop m_eStop = new EStop();
   public static Horn_ON horn_ON = new Horn_ON();
@@ -85,7 +85,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

@@ -5,13 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+
+import frc.robot.RobotContainer;
 
 
 public class Horn_ON extends CommandBase {
   /** Creates a new Horn_ON. */
   public Horn_ON() {
-    addRequirements(Robot.valves);
+    addRequirements(RobotContainer.valves);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -22,7 +23,7 @@ public class Horn_ON extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.valves.horn.set(true); 
+    RobotContainer.valves.horn.set(true); 
   }
 
   // Called once the command ends or is interrupted.

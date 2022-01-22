@@ -5,12 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Valves;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -19,17 +18,19 @@ import frc.robot.subsystems.Valves;
  * project.
  */
 public class Robot extends TimedRobot {
+  
   //private Command m_autonomousCommand;
   public static RobotContainer m_robotContainer;
+  private final Timer m_timer = new Timer();
 
-  public static Valves valves = new Valves();
-  public static DriveTrain driveTrain = new DriveTrain();
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   @Override
   public void robotInit() {
+    
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -44,7 +45,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    SmartDashboard.updateValues();
+    SmartDashboard.putData("Encoder?", RobotContainer.driveTrain.encoderPosition());
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
@@ -62,7 +63,8 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-
+    m_timer.reset();
+    m_timer.start();
 
     // schedule the autonomous command (example)
 
@@ -70,7 +72,24 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    if (m_timer.get() < 2.0) {
+      m_robotContainer.driveTrain.manualDrive(0.5, 0); // drive forwards half speed
+    } else {
+      m_robotContainer.driveTrain.manualDrive(0, 0); // stop robot
+        if (m_timer.get() > 2.0 && m_timer.get() < 4.6){
+          m_robotContainer.driveTrain.manualDrive(0, 0.5);
+        } else {
+          m_robotContainer.driveTrain.manualDrive(0, 0);
+          if (m_timer.get() > 4.5 && m_timer.get() < 6.0){
+            m_robotContainer.driveTrain.manualDrive(0.35, 0);
+          } else {
+            m_robotContainer.driveTrain.manualDrive(0, 0);
+          }
+        }
+    }
+    
+  }
 
   @Override
   public void teleopInit() {
@@ -84,6 +103,9 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    double move = -Robot.m_robotContainer.GetJoystickRawAxis(Constants.Y_AXIS_ID);
+    double turn = Robot.m_robotContainer.GetJoystickRawAxis(Constants.X_AXIS_ID);
+    RobotContainer.driveTrain.manualDrive(move, turn);
     
   }
 

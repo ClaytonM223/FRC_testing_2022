@@ -15,7 +15,7 @@ package frc.robot;
  */
 public final class Constants {
       //USB
-      public static final int JOYSTICK_ID = 1;
+      public static final int JOYSTICK_ID = 0;
       //BUTTONS
       public static final int TUBE_1_BUTTON_ID = 3;
       public static final int TUBE_2_BUTTON_ID = 4;

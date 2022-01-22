@@ -4,20 +4,15 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.CTREJNIWrapper;
 
-import edu.wpi.first.hal.CTREPCMJNI;
-import edu.wpi.first.hal.simulation.CTREPCMDataJNI;
-import edu.wpi.first.wpilibj.PneumaticsControlModule;
 //import edu.wpi.first.hal.CTREPCMJNI;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.simulation.CTREPCMSim;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
+
 
 public class Valves extends SubsystemBase {
   /** Creates a new Valves. */
